@@ -1,0 +1,27 @@
+{
+  "name": "tgbot",
+  "version": "2.0.0",
+  "description": "My First Telegram Bot 2.0",
+  "main": "index.js",
+  "dependencies": {
+    "git": "^0.1.5",
+    "mongodb": "^4.3.1",
+    "node-telegram-bot-api": "^0.56.0",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "tg-bot"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "tgbot"
+  ],
+  "author": "AxrorJS",
+  "license": "ISC"
+}
