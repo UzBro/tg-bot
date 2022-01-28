@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "git": "^0.1.5",
+    "mongodb": "^4.3.1",
     "node-telegram-bot-api": "^0.56.0",
     "nodemon": "^2.0.15"
   },
