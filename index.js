@@ -50,7 +50,7 @@ const start = async () => {
 			await Users.insertOne({id: `${chatId}`, name: `${msg.from.first_name}`, right: 0, wrong: 0})
 		}
                 const user = await Users.findOne({id: `${chatId}`})
-                return bot.sendMessage(chatId, `Sening isming ${msg.from.first_name}` + msg.from.last_name ? msg.from.last_name : '' + `, togri topilgan javoblar ${user.right}, notogrisi ${user.wrong}`);
+                return bot.sendMessage(chatId, `Sening isming ${msg.from.first_name}, togri topilgan javoblar ${user.right}, notogrisi ${user.wrong}`);
             }
             if (text === '/game') {
                 return startGame(chatId);
