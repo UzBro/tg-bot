@@ -9,8 +9,8 @@ const chats = {}
 const Users = client.db().collection('tgbot')
 
 const startGame = async (chatId) => {
-	if (!await Users.findOne({id: `${chatId}`})) {
-			await Users.insertOne({id: `${chatId}`, name: `${msg.from.first_name}`, right: 0, wrong: 0})
+	if (!await Users.findOne({name: `${msg.from.first_name}`})) {
+			await Users.insertOne({name: `${msg.from.first_name}`, right: 0, wrong: 0})
 		}
     await bot.sendMessage(chatId, `Men 0 dan 9 gacha raqam o'ylayman, sen topishga urinib ko'r)`);
     const randomNumber = Math.floor(Math.random() * 10)
@@ -39,17 +39,17 @@ const start = async () => {
 
         try {
             if (text === '/start') {
-		if (!await Users.findOne({id: `${chatId}`})) {
-			await Users.insertOne({id: `${chatId}`, name: `${msg.from.first_name}`, right: 0, wrong: 0})
+		if (!await Users.findOne({name: `${msg.from.first_name}`})) {
+			await Users.insertOne({name: `${msg.from.first_name}`, right: 0, wrong: 0})
 		}
                 await bot.sendSticker(chatId, 'https://tlgrm.ru/_/stickers/ea5/382/ea53826d-c192-376a-b766-e5abc535f1c9/7.webp')
                 return bot.sendMessage(chatId, `Salom men Telegram bot! Bu Axrorning birinchi dasturi!!!`);
             }
             if (text === '/info') {
-		if (!await Users.findOne({id: `${chatId}`})) {
-			await Users.insertOne({id: `${chatId}`, name: `${msg.from.first_name}`, right: 0, wrong: 0})
+		if (!await Users.findOne({name: `${msg.from.first_name}`})) {
+			await Users.insertOne({name: `${msg.from.first_name}`, right: 0, wrong: 0})
 		}
-                const user = await Users.findOne({id: `${chatId}`})
+                const user = await Users.findOne({name: `${msg.from.first_name}`})
                 return bot.sendMessage(chatId, `Sening isming ${msg.from.first_name}, togri topilgan javoblar ${user.right}, notogrisi ${user.wrong}`);
             }
             if (text === '/game') {
@@ -69,14 +69,14 @@ const start = async () => {
         if (data === '/again') {
             return startGame(chatId)
         }
-        let user = await Users.findOne({id: `${chatId}`})
+        let user = await Users.findOne({name: `${msg.from.first_name}`})
         if (data == chats[chatId]) {
 		++user.right
-            await Users.updateOne({id: `${chatId}`},{$set: {right:`${user.right}`}});
+            await Users.updateOne({name: `${msg.from.first_name}`},{$set: {right:`${user.right}`}});
             await bot.sendMessage(chatId, `Kallangga qoilm)) topib qo'yding!! ${chats[chatId]} to'g'ri topding`, againOptions);
         } else {
 		++user.wrong
-            await Users.updateOne({id: `${chatId}`},{$set: {wrong:`${user.wrong}`}});
+            await Users.updateOne({name: `${msg.from.first_name}`},{$set: {wrong:`${user.wrong}`}});
             await bot.sendMessage(chatId, `Topa olmading, men ${chats[chatId]} sonini o'ylagandim`, againOptions);
         }
       
