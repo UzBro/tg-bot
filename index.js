@@ -9,9 +9,7 @@ const chats = {}
 const Users = client.db().collection('tgbot')
 
 const startGame = async (chatId) => {
-	if (!await Users.findOne({name: `${msg.from.first_name}`})) {
-			await Users.insertOne({name: `${msg.from.first_name}`, right: 0, wrong: 0})
-		}
+	
     await bot.sendMessage(chatId, `Men 0 dan 9 gacha raqam o'ylayman, sen topishga urinib ko'r)`);
     const randomNumber = Math.floor(Math.random() * 10)
     chats[chatId] = randomNumber;
@@ -53,6 +51,9 @@ const start = async () => {
                 return bot.sendMessage(chatId, `Sening isming ${msg.from.first_name}, togri topilgan javoblar ${user.right}, notogrisi ${user.wrong}`);
             }
             if (text === '/game') {
+               if (!await Users.findOne({name: `${msg.from.first_name}`})) {
+			await Users.insertOne({name: `${msg.from.first_name}`, right: 0, wrong: 0})
+		}
                 return startGame(chatId);
             }
             return bot.sendMessage(chatId, 'Nma deb yozganingni tushuna olmadm, yana bir bor urinib kor!)');
